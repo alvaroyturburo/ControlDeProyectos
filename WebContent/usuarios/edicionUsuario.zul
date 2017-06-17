@@ -1,0 +1,102 @@
+<?page title="Usuario" contentType="text/html;charset=UTF-8" automaticTimeout="false" ?>
+<zk>
+<window id="winUsuario"
+		title="Edicion de Usuario" 
+		border="normal"
+		height="min"
+		width="350px"
+		position="center,center" 
+		closable="true"
+		contentStyle="overflow:auto"
+    	action="show: slideDown;hide: slideUp"
+    	onClose="@command('salir')"
+    	apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('ec.ed.upse.controlProyectosGad.controladores.EdicionUsuario')">
+	<vlayout>
+		<grid pagingPosition="both">
+			<columns>
+				<column hflex="min"/>
+				<column hflex="max"/>
+			</columns>
+			<rows>
+				<row>
+					<label value="Nombre:"/>
+					<textbox 	value="@bind(vm.persona.nombres)"
+								constraint="no empty: debe ingresar el nombre"
+								width="100%"/>
+				</row>
+				<row>
+					<label value="Apellido Paterno:"/>
+					<textbox 	value="@bind(vm.persona.apellido1)"
+								constraint="no empty: debe ingresar el apellido paterno"
+								width="100%"/>
+				</row>
+				<row>
+					<label value="Apellido Materno:"/>
+					<textbox 	value="@bind(vm.persona.apellido2)"
+								constraint="no empty: debe ingresar el apellido materno"
+								width="100%"/>
+				</row>
+				<row>
+					<label value="Departamento:" />
+					<combobox model="@load(vm.departamentos)"
+						selectedItem="@bind(vm.funcionario.pgDepartamento)"
+						value="@load(vm.funcionario.pgDepartamento.descripcion)">
+						<template name="model">
+							<comboitem
+								label="@load(each.descripcion)" value="@load(each.descripcion)" />
+						</template>
+					</combobox>
+				</row>
+				<row>
+						<label value="Vigencia: "/>
+						<datebox 	value="@bind(vm.funcionario.vigenciaDesde)" 
+									width="200px"
+									constraint="@load(vm.validaFecha)"
+									id="dtbFechaVigencia"/>
+				</row>
+				<!--<row>
+					<label value="Rol:" />
+					<combobox model="@load(vm.roles)"
+						selectedItem="@bind(vm.usuario.pdpsRole)"
+						value="@load(vm.usuario.pdpsRole.descripcion)">
+						<template name="model">
+							<comboitem
+								label="@load(each.descripcion)" value="@load(each.descripcion)" />
+						</template>
+					</combobox>
+				</row>-->
+				<row>
+					<label value="Rol:" />
+					<combobox model="@load(vm.roles)"
+						selectedItem="@bind(vm.role)"
+						value="@load(vm.role.descripcion)">
+						<template name="model">
+							<comboitem
+								label="@load(each.descripcion)" value="@load(each.descripcion)" />
+						</template>
+					</combobox>
+				</row>
+				<row>
+					<label value="Usuario:"/>
+					<textbox 	value="@bind(vm.usuario.alias)"
+								constraint="no empty: debe ingresar el usuario"
+								width="100%"/>
+				</row>
+				<row>
+					<label value="Contrasenia:"/>
+					<textbox 	value="@bind(vm.usuario.contrasena)"
+								constraint="no empty: debe ingresar la contrasenia"
+								width="100%"
+								type="password"/>
+				</row>
+			</rows>
+		</grid>
+		<vbox align="center" hflex="1" vflex="1">
+			<button id="buttonAceptar"
+					label="Aceptar"
+					onClick="@command('guardar')"/>
+		</vbox>
+	</vlayout>
+</window>
+</zk>

@@ -1,0 +1,299 @@
+<?page title="Proyecto" contentType="text/html;charset=UTF-8" automaticTimeout="false" ?>
+<zk>
+	<window id="winProyecto" title="Edicion de Proyecto" border="normal"
+		height="80%" width="60%" position="center,center" closable="true"
+		contentStyle="overflow:auto" action="show: slideDown;hide: slideUp"
+		onClose="@command('salir')" apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('ec.ed.upse.controlProyectosGad.controladores.EdicionProyecto')">
+		<vlayout>
+			<vbox align="center">			
+				<div sclass="z-toolbar" 
+				       style="padding:0; border-bottom: 0px; border-top: 0px">
+						<hbox pack="stretch" width="100%">
+						<toolbar align="start" orient="horizontal" height="42px" style="float:left" width="100%">
+							<toolbarbutton id="buttonAceptar" onClick="@command('guardar')" label="Grabar" image="/imagenes/save.png" height="35px"/>
+							<label id="lblNota" value="Para agregar los financiamientos se debe crear el proyecto, despues editar"/>
+							<separator orient="vertical" width="350px"/>
+						</toolbar>
+						<toolbar align="end" orient="horizontal" height="42px" style="float:right" width="170%">
+							<toolbarbutton id="buttonSalir" onClick="@command('salir')" label="salir" image="/imagenes/salir.png" height="35px"/>
+						</toolbar>		
+						</hbox>
+				</div>
+			</vbox>
+			<hbox hflex="1">
+				<tabbox  width="100%" height="650px">
+					<tabs>
+						<tab label="Descripción y estado del Proyecto"
+							closable="false" />
+						<tab label="Ubicación del proyecto"
+							closable="false" />
+						<tab label="Costo de la Inversión"
+							closable="false" />
+					</tabs>
+					<tabpanels>
+						<!-- Tab de registro de la parte de descripcion y estado del proyecto -->
+						<tabpanel >
+							<grid vflex="1">
+								<columns>
+									<column hflex="max" />
+								</columns>
+								<rows>
+									<row>
+										<groupbox>
+							                <caption label="Proyecto"/>
+												<label value="Nombre Proyecto:" />
+												<textbox
+													value="@bind(vm.proyecto.descripcion)"
+													constraint="no empty: debe ingresar el nombre" width="100%" 
+													rows="2"/>
+										</groupbox>
+									</row>
+									<row>
+										<groupbox >
+								                <caption label="Estado del Proyecto"/>
+												<hlayout vflex="1" hflex="1"> 
+													<vlayout hflex="1" >
+														<radiogroup>
+										                    <hlayout>
+										                        <vlayout hflex="1" >
+											                        <radio label="Nuevo" id="radioNuevo"/>
+											                        <radio label="Arrastre" id="radioArrastre"/>
+										                        </vlayout>
+										                    </hlayout>
+										                </radiogroup>
+									                </vlayout>
+									                <vlayout hflex="2" >
+										                <label value="AÃ±o de arrastre:"/>
+														<textbox value="@bind(vm.proyecto.anioArrastre)"
+																constraint="no empty: debe ingresar el nombre"
+																width="100%"
+																id="txtArrastre"/>
+									                </vlayout>
+									                <vlayout hflex="2" >
+										                <label value="Estado del Proyecto:"/>
+														<combobox model="@load(vm.estadoproyect)"
+															selectedItem="@bind(vm.proyecto.pdpEstadoProyecto)"
+															value="@load(vm.proyecto.pdpEstadoProyecto.descripcion)">
+															<template name="model">
+																<comboitem
+																	label="@load(each.descripcion)" value="@load(each.descripcion)" />
+															</template>
+														</combobox>
+									                </vlayout>
+									             </hlayout>
+								                
+										</groupbox>
+									</row>
+									<row>
+										<groupbox >
+								           <caption label="Duracion"/> 
+								           <hlayout vflex="1" hflex="1"> 
+													<vlayout hflex="1" >
+														<label value="Tiempo previsto:"/>
+														<textbox value="@bind(vm.proyecto.tiempoPrevisto)"
+																constraint="no empty: debe ingresar el nombre"
+																width="100%"/>
+									                </vlayout>
+									                <vlayout hflex="1" >
+										                <label value="Fecha inicio:"/>
+										                <datebox 	value="@bind(vm.proyecto.fechaInicioConvertidad)" 
+														width="190px"				
+														id="dtbFechaInicio"/>
+									                </vlayout>
+									                <vlayout hflex="1" >
+										                <label value="Fecha fin:"/>
+										                <datebox 	value="@bind(vm.proyecto.fechaFinConvertidad)" 
+														width="190px"
+														id="dtbFechaFin"/>
+									                </vlayout>
+									             </hlayout>
+								        </groupbox>
+									</row>
+									<row>
+										<groupbox >
+								           <caption label="Descripcion"/> 
+								           <hlayout vflex="1" hflex="1">
+								           		<separator orient="vertical"></separator>
+								           		<label value="Modalidad:"/> 
+									           		<combobox model="@load(vm.modalidadproyect)"
+																selectedItem="@bind(vm.proyecto.pdpModalidad)"
+																value="@load(vm.proyecto.pdpModalidad.descripcion)">
+																<template name="model">
+																	<comboitem
+																		label="@load(each.descripcion)" value="@load(each.descripcion)" />
+																</template>
+													</combobox>
+												<separator orient="vertical"></separator>
+												<label value="Tipo de Avance:"/> 
+									           		<combobox model="@load(vm.tipoAvanceproyect)"
+																selectedItem="@bind(vm.proyecto.pdpTipoAvance)"
+																value="@load(vm.proyecto.pdpTipoAvance.descripcion)">
+																<template name="model">
+																	<comboitem
+																		label="@load(each.descripcion)" value="@load(each.descripcion)" />
+																</template>
+													</combobox>
+								           </hlayout>
+								        </groupbox>
+									</row>
+									<row>
+										<groupbox >
+								           <caption label="Observacion"/> 
+								           <textbox value="@bind(vm.proyecto.observacion)"
+																width="100%"
+																rows="4"/>
+								        </groupbox>
+									</row>
+								</rows>
+							</grid>
+						</tabpanel>
+						
+						<!-- Tab de ubicacion del proyecto -->
+						<tabpanel>
+							<div >
+							    <script type="text/javascript" content="zk.googleAPIkey='AIzaSyCh3GQ3xUJmVPGZpXTKiOpWAhBQEC05gqY'" />
+							    <gmaps version="3.9" id="gmaps" width="100%" height="450px" showSmallCtrl="true" zoom="9" lat="-2.1229580918" lng="-80.586065722" onMapDoubleClick="@command('crearpunto')">
+							     
+							    </gmaps>
+							</div>
+							<div>
+							 <grid >
+							        <rows>
+							            <row>
+							                <label value="Latitude:" />
+							                <doublebox id="latitude" hflex="1" />
+							            </row>
+							            <row>
+							                <label value="Longitude:" /> 
+							                <doublebox id="longitude" hflex="1" />
+							            </row>
+							            <row>
+							                <label value="Zoom Level:" /> 
+							                <intbox id="zoom" hflex="1" />
+							            </row>
+							            <row>
+							                <label value="Open Info:" />
+							                <button id="toggleInfo" label="Toggle Info" hflex="1" />
+							            </row>
+							        </rows>
+							    </grid>
+							</div>
+						</tabpanel>
+						
+						<!-- Tab costos del proyecto -->
+						<tabpanel>
+						<grid vflex="1">
+								<columns>
+									<column hflex="max" />
+								</columns>
+								<rows>
+									<row>
+										<groupbox>
+							                <caption label="Costos"/>
+												<hlayout vflex="1" hflex="1"> 
+													<separator orient="vertical"></separator>
+													<vlayout hflex="1" >
+										                <label value="Costo de estudio:"/>
+														<textbox value="@bind(vm.proyecto.costoEstudio)"
+																constraint="no empty: debe ingresar el nombre"
+																width="100%"/>
+									                </vlayout>
+									                <separator orient="vertical"></separator>
+									                <vlayout hflex="1" >
+										                <label value="Costo de ejecucion:"/>
+														<textbox value="@bind(vm.proyecto.costoEjecucion)"
+																constraint="no empty: debe ingresar el nombre"
+																width="100%"/>
+									                </vlayout>
+									                <separator orient="vertical"></separator>
+									                <vlayout hflex="1" >
+										                <label value="Monto excedente:"/>
+														<textbox value="@bind(vm.proyecto.montoExcedente)"
+																constraint="no empty: debe ingresar el nombre"
+																width="100%"/>
+									                </vlayout>
+									                <separator orient="vertical"></separator>
+									                <vlayout hflex="1" >
+										                <label value="Monto total:"/>
+														<textbox value=""
+																constraint="no empty: debe ingresar el nombre"
+																width="100%"/>
+									                </vlayout>
+									                <separator orient="vertical"></separator>
+									             </hlayout>
+										</groupbox>
+									</row>
+									<row>
+										<groupbox id="grupoBoxFinan">
+							                <caption label="Financiamientos"/>
+												<hlayout vflex="1" hflex="1"> 
+													<vlayout hflex="2" >
+										                <label value="Fuente:"/>
+														<combobox model="@load(vm.tipoAvanceproyect)"
+																selectedItem="@bind(vm.proyecto.pdpTipoAvance)"
+																value="@load(vm.proyecto.pdpTipoAvance.descripcion)">
+																<template name="model">
+																	<comboitem
+																		label="@load(each.descripcion)" value="@load(each.descripcion)" />
+																</template>
+													</combobox>
+									                </vlayout>
+									                <vlayout hflex="1" >
+										                <label value="Monto(USD):"/>
+														<textbox value=""
+																constraint="no empty: debe ingresar el nombre"
+																width="100%"/>
+									                </vlayout>
+									                <separator orient="vertical"></separator>
+									                <vlayout hflex="1" >
+										                <button label="Agregar" />
+									                </vlayout>
+									                <vlayout hflex="1" >
+										                <button label="Modificar" />
+									                </vlayout>
+									                <vlayout hflex="1" >
+										                <button label="Quitar" />
+									                </vlayout>
+									             </hlayout> 
+										</groupbox>
+									</row>
+									<row>
+										<listbox hflex="1" vflex="1" id="lisBoxFinan">
+											<listhead>
+												<listheader label="Descripcion"/>
+												<listheader label="Monto"/>
+												<listheader label="Porcentaje"/>
+											</listhead>
+											<template >
+												<listitem>
+													<listcell label="" />
+													<listcell label="" />
+													<listcell label="" />
+												</listitem>
+											</template>
+										</listbox>
+									</row>
+									<row>
+										<hlayout vflex="1" hflex="1" id="hLayoutFinan"> 
+											<hlayout vflex="1" hflex="1">
+												<label>Total</label>  
+											</hlayout> 
+											<hlayout vflex="1" hflex="1">
+												<textbox></textbox>
+											</hlayout>
+											<hlayout vflex="1" hflex="1">
+												<textbox></textbox>
+											</hlayout>
+										</hlayout>	
+									</row>
+								</rows>
+							</grid>
+							</tabpanel>
+					</tabpanels>
+				</tabbox>
+
+			</hbox>
+		</vlayout>
+	</window>
+</zk>

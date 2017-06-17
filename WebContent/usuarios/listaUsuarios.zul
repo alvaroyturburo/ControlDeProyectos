@@ -1,0 +1,58 @@
+<?page title="Usuarios" contentType="text/html;charset=UTF-8" automaticTimeout="false" ?>
+<zk>
+	<vlayout 	vflex="1" hflex="1" 
+				apply="org.zkoss.bind.BindComposer" 
+				viewModel="@id('vm') @init('ec.ed.upse.controlProyectosGad.controladores.ListaUsuarios')">
+		<toolbar>
+			<toolbarbutton 	label="Nuevo Usuario" 
+							onClick="@command('nuevoUsuario')" image="/imagenes/new.png"/>
+			<toolbarbutton 	label="Editar Usuario" 
+							onClick="@command('editarUsuario')" image="/imagenes/edit.png"/>
+			<toolbarbutton 	label="Eliminar Usuario" 
+							onClick="@command('eliminarUsuario')" image="/imagenes/delete.png"/>
+			<separator orient="vertical" width="50px" />
+		</toolbar>
+		<separator orient="horizontal"/>
+		<hlayout>
+			<separator orient="vertical"/>
+			<textbox value="@bind(vm.textoBuscar)" hflex="1" />
+			<button label="Buscar"
+					onClick="@command('buscar')" image="/imagenes/find16.png"/>
+			<separator orient="vertical"/>
+		</hlayout>
+		<separator orient="horizontal"/>
+		<hbox vflex="min" hflex="1" align="center">
+			<separator orient="vertical"/>
+			<label 	value="Lista de Usuarios" hflex="1"
+					style="color:black; font-size:15px; text-align: center;"/>
+			<separator orient="vertical"/>
+		</hbox>
+		<hlayout vflex="1" hflex="1">
+			<separator orient="vertical"/>
+			<listbox model="@load(vm.usuarios)" 
+					 selectedItem="@bind(vm.usuarioSeleccionado)" 
+					 hflex="1" vflex="1">
+				<listhead>
+					<listheader label="Nombre"/>
+					<listheader label="Apellido Paterno"/>
+					<listheader label="Apellido Materno"/>
+					<listheader label="Departamento"/>
+					<listheader label="Usuario"/>
+					<listheader label="Rol"/>
+				</listhead>
+				<template name="model">
+					<listitem>
+						<listcell label="@load(each.thFuncionario.pgPersona.nombres)" />
+						<listcell label="@load(each.thFuncionario.pgPersona.apellido1)" />
+						<listcell label="@load(each.thFuncionario.pgPersona.apellido2)" />
+						<listcell label="@load(each.thFuncionario.pgDepartamento.descripcion)" />
+						<listcell label="@load(each.alias)" />
+						<listcell label="@load(each.pdpsRole.descripcion)" />
+					</listitem>
+				</template>
+			</listbox>
+			<separator orient="vertical"/>
+		</hlayout>
+		<separator orient="horizontal"/>
+	</vlayout>
+</zk>

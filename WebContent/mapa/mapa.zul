@@ -1,0 +1,57 @@
+<?page title="Mapa" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<vlayout vflex="1" hflex="1" apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('ec.ed.upse.controlProyectosGad.controladores.Mapa')">
+		<div>
+			<space />
+			<vbox style="background:transparent;">
+				<hbox>
+					<space width="10px" />
+					<vbox>
+						<label value="Modalidad:"
+							style="font-weight:bold" />
+						  <combobox model="@load(vm.modalidadproyect)"
+							selectedItem="@bind(vm.modalidadproyect)"
+							value="@load(vm.modalidadproyect.descripcion)">
+							<template name="model">
+								<comboitem
+									label="@load(each.descripcion)"
+									value="@load(each.codigo)" />
+							</template>
+						</combobox>
+					</vbox>
+					<space />
+					<vbox>
+						<label value="Estado del Proyecto:"
+							style="font-weight:bold" />
+						<combobox width="250px" readonly="true"
+							model="@load(vm.estadoproyect)"
+							selectedItem="@bind(vm.estadoproyect)"
+							value="@load(vm.estadoproyect.descripcion)">
+							<template name="model">
+								<comboitem
+									label="@load(each.descripcion)"
+									value="@load(each.codigo)" />
+							</template>
+						</combobox>
+					</vbox>
+					<space />
+					<vbox align="center">
+						<label value="." style="color:white" />
+						<button id="btnBuscar" label="Buscar"
+							width="100px" height="11px" />
+					</vbox>
+				</hbox>
+			</vbox>
+			<space />
+		</div>
+		<div>
+			<script type="text/javascript"
+				content="zk.googleAPIkey='AIzaSyCh3GQ3xUJmVPGZpXTKiOpWAhBQEC05gqY'" />
+			<gmaps version="3.9" id="gmaps" width="100%" height="800px"
+				showSmallCtrl="true" zoom="10" lng="-80.670817" lat="-2.182654">
+
+			</gmaps>
+		</div>
+	</vlayout>
+</zk>

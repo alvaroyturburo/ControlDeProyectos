@@ -1,0 +1,40 @@
+<?page title="Inicio de Sesión" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window title="Inicio de Sesión" border="normal" 
+		width="275px" vflex="max"
+		apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('ec.ed.upse.controlProyectosGad.controladores.Login')"
+		position="center" mode="modal">
+	<grid>
+		<columns>
+			<column hflex="min"/>
+			<column/>
+		</columns>
+		<rows>
+			<row>
+				<label value="Usuario:"/>
+				<textbox value="@save(vm.alias)"/>
+			</row>
+			<row>
+				<label value="Clave:"/>
+				<textbox  value="@save(vm.contrasena)" type="password"/>
+			</row>
+				
+		
+		</rows>
+	</grid>
+	<separator/>
+	<div align="center">
+		<button label="Ingresar" onClick="@command('ingresar')" image="imagenes/accept.png"/>
+		<button label="Cancelar" onClick="@command('cancelar')" image="imagenes/cancel.png"/>
+	</div>
+	<separator/>
+	<div align="center">
+		<button label="¿Olvido su clave?" onClick="@command('ingresar')" image="imagenes/group.png"/>
+	</div>
+	<div align="center">
+	<label value="@load(vm.mensaje)" style="color:red"/>
+	</div>
+	
+</window>
+</zk>

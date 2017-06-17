@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="ControlProyectosGAD">
+		<class>ec.ed.upse.controlProyectosGad.modelo.AdArchivo</class>
+		<class>ec.ed.upse.controlProyectosGad.modelo.PdpAvance</class>
+		<class>ec.ed.upse.controlProyectosGad.modelo.PdpBarrioComunidad</class>
+		<class>ec.ed.upse.controlProyectosGad.modelo.PdpEstadoProyecto</class>
+		<class>ec.ed.upse.controlProyectosGad.modelo.PdpEtapa</class>
+		<class>ec.ed.upse.controlProyectosGad.modelo.PdpFase</class>
+		<class>ec.ed.upse.controlProyectosGad.modelo.PdpFinanciamiento</class>
+		<class>ec.ed.upse.controlProyectosGad.modelo.PdpFuenteFinanciamiento</class>
+		<class>ec.ed.upse.controlProyectosGad.modelo.PdpImagen</class>
+		<class>ec.ed.upse.controlProyectosGad.modelo.PdpLugar</class>
+		<class>ec.ed.upse.controlProyectosGad.modelo.PdpModalidad</class>
+		<class>ec.ed.upse.controlProyectosGad.modelo.PdpProducto</class>
+		<class>ec.ed.upse.controlProyectosGad.modelo.PdpProyecto</class>
+		<class>ec.ed.upse.controlProyectosGad.modelo.PdpTipoAvance</class>
+		<class>ec.ed.upse.controlProyectosGad.modelo.PdpsAuditoria</class>
+		<class>ec.ed.upse.controlProyectosGad.modelo.PdpsFormulario</class>
+		<class>ec.ed.upse.controlProyectosGad.modelo.PdpsRole</class>
+		<class>ec.ed.upse.controlProyectosGad.modelo.PdpsRolesFormulario</class>
+		<class>ec.ed.upse.controlProyectosGad.modelo.PdpsUsuario</class>
+		<class>ec.ed.upse.controlProyectosGad.modelo.PgDepartamento</class>
+		<class>ec.ed.upse.controlProyectosGad.modelo.PgPersona</class>
+		<class>ec.ed.upse.controlProyectosGad.modelo.ThFuncionario</class>
+	
+	<properties>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/bd_proyecto" />
+			<property name="javax.persistence.jdbc.user" value="root" />
+			<property name="javax.persistence.jdbc.password" value="upse" />
+		</properties>
+	</persistence-unit>
+</persistence>
