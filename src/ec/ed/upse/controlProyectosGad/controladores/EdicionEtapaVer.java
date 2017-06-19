@@ -1,7 +1,7 @@
 package ec.ed.upse.controlProyectosGad.controladores;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
+import java.util.Map;
 
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.AfterCompose;
@@ -15,33 +15,29 @@ import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.util.Clients;
-import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Toolbarbutton;
 import org.zkoss.zul.Window;
 
-import ec.ed.upse.controlProyectosGad.modelo.PdpAvance;
-import ec.ed.upse.controlProyectosGad.modelo.PdpAvanceDAO;
 import ec.ed.upse.controlProyectosGad.modelo.PdpEtapa;
+import ec.ed.upse.controlProyectosGad.modelo.PdpEtapaDAO;
 import ec.ed.upse.controlProyectosGad.modelo.PdpProyecto;
 import ec.ed.upse.controlProyectosGad.modelo.PdpProyectoDAO;
+import ec.ed.upse.controlProyectosGad.modelo.PdpsUsuario;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.java.Log;
 
 @Log
-public class EdicionAvance {
+public class EdicionEtapaVer {
 	
-	SimpleDateFormat sdfDate;
-	
-	@Wire private Window winAvance;
+	@Wire private Window winEtapa;
 	@Wire private Toolbarbutton tolGrabar;
-	@Wire private Textbox txtRegistro;
 	
-	@Getter @Setter private PdpAvance avance;
+	@Getter @Setter private PdpEtapa etapa;
 	@Getter @Setter private PdpProyecto proyecto;
-	@Getter @Setter private String strDate;
-	protected PdpAvanceDAO avanceDao = new PdpAvanceDAO();
+	protected PdpEtapaDAO etapaDao = new PdpEtapaDAO();
 	protected PdpProyectoDAO proyectoDAo = new PdpProyectoDAO();
+	
 	
 	@AfterCompose
 	public void afterCompose(@ContextParam(ContextType.VIEW) Component view){
@@ -50,46 +46,36 @@ public class EdicionAvance {
 		session=Sessions.getCurrent();
 		//usuario_login = (PdpsUsuario) session.getAttribute("_USUARIO_");
 		proyecto = (PdpProyecto) Executions.getCurrent().getArg().get("Proyecto");
-		avance = (PdpAvance) Executions.getCurrent().getArg().get("Avance");
+		etapa = (PdpEtapa) Executions.getCurrent().getArg().get("Etapa");
 						
 		log.info("Edicion de proyectos por etapas");
-		
-		
-		if(avance.getId()>0){
-			txtRegistro.setText(avance.getFechaRegistro());
-		}else{
-		sdfDate = new SimpleDateFormat("yyyy-MM-dd");//dd/MM/yyyy
- 	    Date now = new Date();
- 	    strDate = sdfDate.format(now);
- 	    txtRegistro.setText(strDate);
- 	    }
 	}
 	
 	@Command
 	public void salir(){
-		winAvance.detach();
+		winEtapa.detach();
 	}
 	
 	public void guardarProyecto(){
-		avance.setPdpProyecto(proyecto);
-		avance.setEstado("A");
+		etapa.setPdpProyecto(proyecto);
+		etapa.setEstado("A");
 		
 		try {
-			avanceDao.getEntityManager().getTransaction().begin();
+			etapaDao.getEntityManager().getTransaction().begin();
 
-			if(avance.getId() == 0){
-				avanceDao.getEntityManager().persist(avance);
+			if(etapa.getId() == 0){
+				etapaDao.getEntityManager().persist(etapa);
 			}else{
-				avance = (PdpAvance) avanceDao.getEntityManager().merge(avance);
+				etapa = (PdpEtapa) etapaDao.getEntityManager().merge(etapa);
 			}
 			
-			avanceDao.getEntityManager().getTransaction().commit();
-			Clients.showNotification("Avance registrado!");
+			etapaDao.getEntityManager().getTransaction().commit();
+			Clients.showNotification("Etapa registrado!");
 			BindUtils.postGlobalCommand(null, null, "ListaProyectos.buscar", null);
 			salir();
 		} catch (Exception e) {
 			e.printStackTrace();
-			avanceDao.getEntityManager().getTransaction().rollback();
+			etapaDao.getEntityManager().getTransaction().rollback();
 			Clients.showNotification("Error en la ejecución", "error", tolGrabar, "end_center",3);
 		}
 	}

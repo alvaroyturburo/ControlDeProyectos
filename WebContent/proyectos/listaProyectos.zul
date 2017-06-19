@@ -87,6 +87,7 @@
 						<listheader label="Planilla"/>
 						<listheader label="Fecha Inicio"/>
 						<listheader label="Fecha Final"/>
+						<listheader label="Ver"/>
 					</listhead>
 					<template name="model">
 						<listitem>
@@ -94,6 +95,9 @@
 							<listcell label="@load(each.numeroPlanilla)" />
 							<listcell label="@load(each.fechaInicio)" />
 							<listcell label="@load(each.fechaFin)" />
+							<listcell>
+								<button>Ver más</button>
+							</listcell>
 						</listitem>
 					</template>
 				</listbox>
@@ -105,12 +109,16 @@
 						<listheader label="Descripcion"/>
 						<listheader label="Fecha Inicio"/>
 						<listheader label="Fecha Final"/>
+						<listheader label="Ver"/>
 					</listhead>
 					<template name="model">
 						<listitem>
 							<listcell label="@load(each.descripcion)" />
 							<listcell label="@load(each.fechaInicio)" />
 							<listcell label="@load(each.fechaFin)" />
+							<listcell>
+								<button>Ver más</button>
+							</listcell>
 						</listitem>
 					</template>
 				</listbox>
@@ -123,6 +131,7 @@
 						<listheader label="Dias plazo"/>
 						<listheader label="Fecha Inicio"/>
 						<listheader label="Fecha Final"/>
+						<listheader label="Ver"/>
 					</listhead>
 					<template name="model">
 						<listitem>
@@ -130,6 +139,9 @@
 							<listcell label="@load(each.diasPlazo)" />
 							<listcell label="@load(each.fechaInicio)" />
 							<listcell label="@load(each.fechaFin)" />
+							<listcell>
+								<button>Ver más</button>
+							</listcell>
 						</listitem>
 					</template>
 				</listbox>

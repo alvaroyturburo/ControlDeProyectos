@@ -1,0 +1,131 @@
+<?page title="Edicion Fase" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winFase" position="center,center" closable="true"
+ mode="modal" width="850px" title="Edicion Fase" onClose="@command('salir')" apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('ec.ed.upse.controlProyectosGad.controladores.EdicionFaseVer')">
+	<div sclass="z-toolbar" 
+			style="padding:0; border-bottom: 0px; border-top: 0px">
+						<hbox pack="stretch" width="100%">
+						<toolbar align="end" orient="horizontal" height="42px" style="float:right" width="170%">
+							<toolbarbutton id="buttonSalir" onClick="@command('salir')" label="salir" image="/imagenes/salir.png" height="35px"/>
+						</toolbar>		
+						</hbox>			
+			
+	</div>
+	<separator />
+			<label value="Nombre del Proyecto: "
+			style="font-weight:bold" />
+			<cell colspan="5">
+				<textbox id="txtDescripcionPro" maxlength="255" width="835px" rows="2"
+					readonly="true" value="@bind(vm.proyecto.descripcion)"/>
+			</cell>
+	<separator />
+			  <hbox>
+			  <vbox>
+					<label value="Fase:"
+					style="font-weight:bold" />
+					<textbox id="txtFase" width="70px"  readonly="true"></textbox>
+			  </vbox>
+			  <separator />
+			  <vbox>
+					<label value="Descripción de la Fase:"
+					style="font-weight:bold" />
+					<textbox id="txtDescripcionFase" width="755px"
+					 value="@{wndRegistroFase$composer.fase.descripcion load-after='tolGrabar.onClick'}"/>
+			  </vbox>
+			 </hbox>
+	<separator />
+		 <groupbox closable="false">
+		<caption label="Duración"
+		style="color:blue; font-weight:bold;" />
+		 <vbox>
+			 <hbox>
+				<vbox >
+					<label value="Dias Plazo:"
+					style="font-weight:bold" />	
+				</vbox>
+				<vbox>
+					<intbox id ="txt_diasplazo"
+					value="@{wndRegistroFase$composer.fase.diasPlazo load-after='tolGrabar.onClick'}"
+					constraint="no empty: Ingrese el tiempo previsto del proyecto." maxlength="5" width="80px"></intbox> 
+				</vbox>
+				<vbox>
+					<label value="Fecha Inicio:"
+					style="font-weight:bold" />
+				</vbox>
+				<vbox>
+					<datebox id="datFechaInicio" maxlength="10"  width="99%"
+					 value="@{wndRegistroFase$composer.fase.fechaInicio load-after='tolGrabar.onClick'}"/>
+				</vbox>			     
+			    <vbox>
+				    <label value="Fecha Fin:"
+				    style="font-weight:bold" />
+				</vbox>
+				<vbox>
+				    <datebox id="datFechaFin" maxlength="10"  width="99%"
+					value="@{wndRegistroFase$composer.fase.fechaFin load-after='tolGrabar.onClick'}" />
+			   </vbox>
+	<separator />
+			   <vbox >
+					<label value="Porcentaje Programado:"
+					style="font-weight:bold" />	
+				</vbox>
+				<vbox>
+					<intbox
+					 value="@{wndRegistroFase$composer.fase.tiempoProgramado load-after='tolGrabar.onClick'}"
+					constraint="no empty: Ingrese el tiempo programado." maxlength="3" width="80px" />	
+				</vbox>
+				<vbox>
+					<label value="%" style="font-weight:bold" />
+				</vbox>
+			   <vbox >
+					<label value="Porcentaje Ejecutado:" 
+					style="font-weight:bold" />	
+				</vbox>
+				<vbox>
+					<intbox
+					value="@{wndRegistroFase$composer.fase.tiempoEjecutado load-after='tolGrabar.onClick'}"
+					constraint="no empty: Ingrese el tiempo ejecutado." maxlength="3" width="80px"/>
+				</vbox>
+				<vbox>
+					<label value="%" style="font-weight:bold" />	
+				</vbox>
+			</hbox>
+		 </vbox>
+		</groupbox>
+<separator />
+	 <groupbox closable="false">
+		<caption label="Productos"
+		style="color:blue; font-weight:bold;" />
+		 <vbox>
+		<hbox>			
+				<vbox>
+					<label value="Ingrese Producto:"
+					style="font-weight:bold" />
+					<textbox id="txtProducto" width="645px"/>	
+				</vbox>
+				<vbox>
+				<button
+					id="btnAgregarProducto" label="Agregar" 
+					image="/imagenes/plus16.png" />
+				</vbox>
+				<vbox>
+				<button
+				    id="btnQuitarProducto" label="Quitar"
+				    image="/imagenes/minus16.png" />
+				</vbox>		
+		</hbox>		
+	</vbox>	
+</groupbox>		
+<separator />		
+		<listbox height="200px" id="lstProducto"
+		model="@{wndRegistroFase$composer.listaProducto load-after='btnAgregarProducto.onClick, btnQuitarProducto.onClick '} " >
+				<listhead>
+					<listheader width="827px" label="Producto" />
+				</listhead>
+				<listitem self="@{each=pro}">
+					<listcell label="@{pro.detalle}" />
+				</listitem>
+		</listbox>
+	</window>
+</zk>

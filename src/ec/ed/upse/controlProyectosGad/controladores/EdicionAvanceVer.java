@@ -29,7 +29,7 @@ import lombok.Setter;
 import lombok.extern.java.Log;
 
 @Log
-public class EdicionAvance {
+public class EdicionAvanceVer {
 	
 	SimpleDateFormat sdfDate;
 	

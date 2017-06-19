@@ -1,0 +1,141 @@
+<?page title="Avance" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winAvance" height="80%" width="60%" position="center,center" closable="true" 
+	border="normal" mode="modal" title="Edicion de Avance"
+	onClose="@command('salir')" apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('ec.ed.upse.controlProyectosGad.controladores.EdicionAvanceVer')">
+	<div sclass="z-toolbar" 
+				       style="padding:0; border-bottom: 0px; border-top: 0px">
+						<hbox pack="stretch" width="100%">
+						<toolbar align="end" orient="horizontal" height="42px" style="float:right" width="170%">
+							<toolbarbutton id="buttonSalir" onClick="@command('salir')" label="salir" image="/imagenes/salir.png" height="35px"/>
+						</toolbar>		
+						</hbox>
+				</div>
+	<separator />
+	<groupbox closable="false" width="885px">
+	<caption label="Datos del Proyecto" style="font-weight:bold;" />
+	<hbox>
+			<vbox>
+				<label value="Fecha de Registro" style="font-weight:bold" />
+				<textbox id="txtRegistro" width="66%" rows="2" readonly="true" />
+			</vbox>
+			<vbox>		
+				<label value="Nombre del Proyecto" style="font-weight:bold" />
+				<textbox value="@bind(vm.proyecto.descripcion)" maxlength="255" width="750px" rows="2"
+					readonly="true"/>
+			</vbox>
+	 </hbox>
+	<separator />
+	<vbox style="margin-left:48%" >
+	<hbox >
+			<separator />
+					
+						<vbox>
+						<label value="Total Inversión:" style="font-weight:bold" />
+						</vbox>
+						<vbox>
+						<doublebox value="@bind(vm.proyecto.costoEjecucion)" maxlength="300" width="120%" readonly="true" format="###,###,##0.00"/>
+						</vbox>
+	</hbox>
+	</vbox>	
+	</groupbox >
+	<separator />
+		<groupbox closable="false" width="885px">
+		<hbox style="margin-left:20%">
+					<vbox hflex="1" vflex="1">
+					<label value="# Planilla" style="font-weight:bold" />
+					<textbox id="txtPlanilla" width="100%" constraint="no empty: Ingrese el numero de factura." 
+					value="@bind(vm.avance.numeroPlanilla)" />
+			  </vbox>
+			  <separator />
+			  <vbox hflex="1" vflex="1">
+					<label value="# Factura"
+					style="font-weight:bold" />
+					<textbox id="txtFactura" width="100%"
+					value="@bind(vm.avance.numeroFactura)"
+					constraint="no empty: Ingrese el numero de factura."/>
+			  </vbox>
+			  <separator />
+			  <vbox hflex="1" vflex="1">
+					<label value="Valor Factura:" style="font-weight:bold" />	
+					<doublebox 
+					value="@bind(vm.avance.valorFactura)"
+					constraint="no empty: Ingrese el valor." width="100%" format="###,###,##0.00"
+					id = "txtvalorFactura"
+					/>
+				</vbox>		
+				<separator />
+				<vbox hflex="1" vflex="1">
+					<label value="Fiscalizador:" style="font-weight:bold"/>
+					<combobox id="cmbFiscalizador"
+						constraint="no empty: Escoja el Fiscalizador."
+						model="@{wndRegistroAvance$composer.listadoFiscalizador}"
+						selectedItem="@{wndRegistroAvance$composer.avance.thFuncionario load-after='tolGrabar.onClick'}"
+						value="@{wndRegistroAvance$composer.avance.thFuncionario.pgPersona.nombreCompleto access='load', load-after='tolGrabar.onClick'}"
+						width="100%" readonly="true">
+						<comboitem self="@{each=fis}"
+						label="@{fis.pgPersona.nombrecompleto}" value="@{fis.id}"/>
+						</combobox>	
+				</vbox>
+		 </hbox>	
+		 
+	</groupbox>
+	<separator/>
+	<hbox>
+		 <vbox>
+					<label value="Descripción del Avance:"
+					style="font-weight:bold" />
+					<textbox id="txtDescripcion" width="885px"  rows="2"
+					value="@bind(vm.avance.descripcion)"/>
+		 </vbox>
+	</hbox>
+	<separator />
+		 <groupbox closable="false" width="885px">
+		<caption label="Duración"
+		style="font-weight:bold" />
+			 <hbox style="margin-left:25%">
+				<vbox hflex="1" vflex="1">
+					<label value="Fecha Inicio:"
+					style="font-weight:bold" />
+					<datebox id="datFechaInicio" maxlength="10"  width="100%"
+					 value="@bind(vm.avance.fechaInicioConvertidad)"
+					 constraint="no empty: Ingrese fecha inicio."/>
+				</vbox>	
+				<separator />		     
+			    <vbox hflex="1" vflex="1">
+				    <label value="Fecha Fin:"
+				    style="font-weight:bold" />
+				    <datebox id="datFechaFin" maxlength="10"  width="100%"
+					value="@bind(vm.avance.fechaFinConvertidad)" 
+					constraint="no empty: Ingrese fecha fin."/>
+			   </vbox>	
+			   <separator />
+			   <vbox hflex="1" vflex="1">
+					<label value="Porcentaje:" 
+					style="font-weight:bold" />	
+					<intbox id = "porcentaje_avance" format = "##,##"
+					 value="@bind(vm.avance.porcentajeAvance)" 
+					 constraint="no empty: Ingrese el porcentaje." maxlength="4" width="100%"/>
+					<label value="%"/>	
+				</vbox>	
+				<separator />
+				<vbox hflex="1" vflex="1" 
+				style="margin-left:70%">    
+					
+				<label value="%" style="font-weight:bold,"/>
+				</vbox>						  
+			</hbox>
+		</groupbox>
+	<separator/>
+	<hbox>
+		 <vbox>
+			<label value="Observaciones:"
+			style="font-weight:bold" />
+			<textbox id="txtObservacion" width="885px"  rows="3"
+			value="@bind(vm.avance.observaciones)"/>
+		 </vbox>
+	</hbox>	
+		<separator/>
+</window>
+</zk>
