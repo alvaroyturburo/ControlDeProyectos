@@ -19,8 +19,18 @@
 				<label value="Clave:"/>
 				<textbox  value="@save(vm.contrasena)" type="password"/>
 			</row>
-				
-		
+			<row>
+				<vbox>
+					<label value="Validacion:"/>
+				</vbox>
+				<vbox>
+					<hbox>
+						<textbox id="txtC"  onChange="@command('comprobar', valor = txtC.value)" width="78px"/>
+						<textbox id="txtCG"  width="78px"  disabled="true"/>
+					</hbox>
+					<button label="Generar" width="160px" onClick="@command('reGenerar')"/>
+				</vbox>
+			</row>
 		</rows>
 	</grid>
 	<separator/>
