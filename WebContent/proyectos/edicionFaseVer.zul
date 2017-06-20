@@ -31,7 +31,7 @@
 					<label value="Descripción de la Fase:"
 					style="font-weight:bold" />
 					<textbox id="txtDescripcionFase" width="755px"
-					 value="@{wndRegistroFase$composer.fase.descripcion load-after='tolGrabar.onClick'}"/>
+					 value="@bind(vm.fase.descripcion)"/>
 			  </vbox>
 			 </hbox>
 	<separator />
@@ -46,7 +46,7 @@
 				</vbox>
 				<vbox>
 					<intbox id ="txt_diasplazo"
-					value="@{wndRegistroFase$composer.fase.diasPlazo load-after='tolGrabar.onClick'}"
+					value="@bind(vm.fase.diasPlazo)"
 					constraint="no empty: Ingrese el tiempo previsto del proyecto." maxlength="5" width="80px"></intbox> 
 				</vbox>
 				<vbox>

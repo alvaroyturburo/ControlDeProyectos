@@ -324,6 +324,57 @@ public class ListaProyectos {
 		}
 	}
 	
+	
+	@Command
+	@NotifyChange({""})
+	public void verAvance(){
+		if(getProyectoSeleccionado() == null){
+			Messagebox.show("Debe seleccionar un proyecto","Administración",Messagebox.OK,Messagebox.ERROR);
+			return;
+		}
+		
+		if(proyectoSeleccionado.getPdpTipoAvance().getDescripcion().equals("Trimestral")){
+			if(getEtapaSeleccionado() == null){
+				Messagebox.show("Debe seleccionar una etapa","Administración",Messagebox.OK,Messagebox.ERROR);
+				return;
+			}else{
+				Map<String, Object> params = new HashMap<String, Object>();
+				params.put("Proyecto", proyectoSeleccionado);
+				params.put("Etapa", etapaSeleccionado);
+				Window ventanaCargar = (Window) Executions.createComponents("proyectos/edicionEtapaVer.zul", null, params);
+				ventanaCargar.doModal();
+			}
+		}else{
+			if(proyectoSeleccionado.getPdpTipoAvance().getDescripcion().equals("Mensual")){
+				if(getAvanceSeleccionado() == null){
+					Messagebox.show("Debe seleccionar un avance","Administración",Messagebox.OK,Messagebox.ERROR);
+					return;
+				}else{
+					Map<String, Object> params = new HashMap<String, Object>();
+					params.put("Proyecto", proyectoSeleccionado);
+					params.put("Avance", avanceSeleccionado);
+					Window ventanaCargar = (Window) Executions.createComponents("proyectos/edicionAvanceVer.zul", null, params);
+					ventanaCargar.doModal();
+				}
+			}else{
+				if(proyectoSeleccionado.getPdpTipoAvance().getDescripcion().equals("Fase")){
+					if(getFaseSeleccionado() == null){
+						Messagebox.show("Debe seleccionar una fase","Administración",Messagebox.OK,Messagebox.ERROR);
+						return;
+					}else{
+						Map<String, Object> params = new HashMap<String, Object>();
+						params.put("Proyecto", proyectoSeleccionado);
+						params.put("Fase", faseSeleccionado);
+						Window ventanaCargar = (Window) Executions.createComponents("proyectos/edicionFaseVer.zul", null, params);
+						ventanaCargar.doModal();
+					}
+				}
+			}
+		}
+	}
+	
+	
+	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Command
 	@NotifyChange({""})

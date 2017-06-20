@@ -32,7 +32,6 @@ import lombok.extern.java.Log;
 public class EdicionFaseVer {
 
 	@Wire private Window winFase;
-	@Wire private Toolbarbutton tolGrabar;
 	@Wire private Textbox txtFase;
 	
 	@Getter @Setter private PdpFase fase;

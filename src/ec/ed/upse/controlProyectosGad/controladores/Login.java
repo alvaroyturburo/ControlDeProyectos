@@ -132,6 +132,7 @@ public class Login {
 	
 	@Command
 	public void reGenerar(){
+		txtC.setDisabled(false);
 		txtCG.setText(getCadenaAlfanumAleatoria(5));
 	}
 }
